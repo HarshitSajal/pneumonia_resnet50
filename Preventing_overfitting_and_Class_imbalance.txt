@@ -1,0 +1,41 @@
+1 ... Detecting and Mitigating Class Imbalance
+
+Class imbalance is diagnosed by checking the distribution of labels in the training set:
+
+	unique, counts = np.unique(train_labels, return_counts=True)
+	print(dict(zip(unique, counts)))
+
+Mitigation Strategies:
+
+	-> Evaluation with Class-Sensitive Metrics: F1 Score, Precision, Recall, and AUC-ROC — all crucial for detecting imbalance effects. These metrics go beyond accuracy to highlight minority class performance (pneumonia detection).
+
+	-> Stratified Dataset Splits (implicit): PneumoniaMNIST's .npz is already pre-split, and the structure suggests it's stratified, preserving class ratios across train/val/test.
+
+	-> DataLoader Shuffling: Ensures batches mix both classes evenly, reducing learning bias from sequence
+	
+	
+2 ... Preventing Overfitting
+
+Overfitting is a major risk in medical models, where the training set might not capture real-world variability. Your code includes multiple robust regularization techniques
+
+	a. Transfer Learning with Pretrained ResNet-50
+
+		Leverages generalizable features learned on ImageNet.
+
+		Reduces overfitting by avoiding training from scratch on limited medical data.
+
+	b. Data Normalization & Augmentation (via Transforms)
+
+		While no augmentations are present in the code yet, this transform pipeline prepares data consistently.
+
+	c. Early Stopping
+
+		Stops training if validation accuracy plateaus, avoiding over-optimization on training data.
+
+	d. Validation Monitoring & Checkpointing
+	
+		Validation loss and accuracy guide model selection (best_model.pth), ensuring generalizable performance.
+
+	e. Batch Normalization (in ResNet layers)
+	
+		Implicit in ResNet-50 backbone, it helps stabilize learning and reduce internal covariate shift.
