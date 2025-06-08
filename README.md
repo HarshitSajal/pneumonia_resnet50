@@ -1,5 +1,3 @@
-# pneumonia_resnet50
-
 # Pneumonia Detection using ResNet50
 
 This project uses PyTorch and a pretrained ResNet-50 model to classify pneumonia from chest X-ray images using the [MedMNIST PneumoniaMNIST dataset](https://medmnist.com/).
