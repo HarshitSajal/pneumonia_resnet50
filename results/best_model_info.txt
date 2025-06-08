@@ -1,0 +1,3 @@
+Best Epoch: 5
+Validation Accuracy: 0.9618
+Validation Loss: 0.1431
